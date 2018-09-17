@@ -143,7 +143,7 @@ touch "$final_path/config/local-production.json"
 
 (
 	cd "$final_path"
-	yarn install --production --pure-lockfile 
+	yarn install --pure-lockfile 
 )
 
 #=================================================
