@@ -141,10 +141,10 @@ ynh_setup_source "$final_path"
 cp ../conf/production.yaml "$final_path/config/production.yaml"
 touch "$final_path/config/local-production.json"
 
-(
-	cd "$final_path"
-	yarn install --production --pure-lockfile 
-)
+
+cd "$final_path"
+yarn install --production --pure-lockfile 
+
 
 #=================================================
 # NGINX CONFIGURATION
