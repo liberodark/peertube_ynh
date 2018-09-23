@@ -86,7 +86,7 @@ chown -R "$app":"$app" "/home/yunohost.app/${app}/storage"
 #=================================================
 
 # install nodejs
-ynh_install_nodejs 8
+# ynh_install_nodejs 8
 
 # add backports for Debian Jessie (required to install ffmpeg)
 if [ "$(lsb_release --codename --short)" == "jessie" ]; then
