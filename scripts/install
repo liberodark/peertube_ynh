@@ -88,7 +88,7 @@ mkdir -p "$datadir"
 #=================================================
 
 # install nodejs
-# ynh_install_nodejs 8 #Nodejs giving error /var/www/peertube/node_modules/rdf-canonize: Command failed on OVH 
+#ynh_install_nodejs 8 #Nodejs giving error /var/www/peertube/node_modules/rdf-canonize: Command failed on OVH 
 
 # Add backports for Debian Jessie (required to install ffmpeg)
 if [ "$(lsb_release --codename --short)" == "jessie" ]; then
