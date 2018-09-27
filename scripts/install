@@ -143,7 +143,7 @@ touch "$final_path/config/local-production.json"
 
 
 cd "$final_path"
- ynh_use_nodejs
+PATH="/usr/bin/:$PATH"
 yarn install --production --pure-lockfile 
 
 
