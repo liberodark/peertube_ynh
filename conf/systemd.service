@@ -4,11 +4,12 @@ After=network.target postgresql.service redis-server.service
 
 [Service]
 Type=simple
+Environment="PATH=__ENV_PATH__"
 Environment=NODE_ENV=production
 Environment=NODE_CONFIG_DIR=__FINALPATH__/config
 User=__APP__
 Group=__APP__
-ExecStart=/bin/sh -c 'PATH=/opt/node_n/bin:$PATH exec npm start'
+ExecStart=/bin/sh -c 'exec npm start'
 WorkingDirectory=__FINALPATH__/
 StandardOutput=syslog
 StandardError=syslog
