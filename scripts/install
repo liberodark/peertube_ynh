@@ -88,7 +88,8 @@ mkdir -p "$datadir"
 #=================================================
 
 # install nodejs
-ynh_install_nodejs 8 #Nodejs giving error /var/www/peertube/node_modules/rdf-canonize: Command failed on OVH 
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
 # Add backports for Debian Jessie (required to install ffmpeg)
 if [ "$(lsb_release --codename --short)" == "jessie" ]; then
