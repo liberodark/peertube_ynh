@@ -144,7 +144,8 @@ touch "$final_path/config/local-production.json"
 
 (
 cd "$final_path"
-export CC=gcc
+yarn global add yarn-upgrade-all
+yarn-upgrade-all
 yarn install --production --pure-lockfile 
 )
 
