@@ -144,7 +144,7 @@ touch "$final_path/config/local-production.json"
 
 (
 cd "$final_path"
-npm install
+export CC=gcc
 yarn install --production --pure-lockfile 
 )
 
