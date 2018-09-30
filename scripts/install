@@ -145,7 +145,7 @@ touch "$final_path/config/local-production.json"
 
 cd "$final_path"
 export PATH="/usr/bin/nodejs:/usr/bin/yarn:/usr/bin/npm:/usr/bin/node:$PATH"
-yarn install --production --pure-lockfile 
+/usr/bin/yarn install --production --pure-lockfile 
 
 
 #=================================================
