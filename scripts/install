@@ -142,11 +142,11 @@ ynh_setup_source "$final_path"
 cp ../conf/production.yaml "$final_path/config/production.yaml"
 touch "$final_path/config/local-production.json"
 
-
+(
 cd "$final_path"
-export PATH="/usr/bin/nodejs:/usr/bin/yarn:/usr/bin/npm:/usr/bin/node:$PATH"
-/usr/bin/yarn install --production --pure-lockfile 
-
+npm install
+yarn install --production --pure-lockfile 
+)
 
 #=================================================
 # NGINX CONFIGURATION
