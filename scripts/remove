@@ -101,6 +101,14 @@ fi
 # Delete a system user
 ynh_system_user_delete "$app"
 
+# Remove 30-peertube-tcp.conf 
+if [ -f /etc/sysctl.d/30-peertube-tcp.conf ]; then
+    
+    # Remove 30-peertube-tcp from /etc/sysctl.d/
+	rm -f /etc/sysctl.d/30-peertube-tcp.conf
+    sysctl -p
+fi
+
 #=================================================
 # SEND A README FOR THE ADMIN
 #=================================================

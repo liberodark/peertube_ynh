@@ -26,6 +26,7 @@ path_url="/"
 admin_email=$YNH_APP_ARG_EMAIL
 admin_pass=$(ynh_string_random 24)
 is_public=$YNH_APP_ARG_IS_PUBLIC
+tuning="1"
 
 
 # This is a multi-instance app, meaning it can be installed several times independently
@@ -60,7 +61,7 @@ ynh_app_setting_set "$app" domain      "$domain"
 ynh_app_setting_set "$app" admin_email "$admin_email"
 ynh_app_setting_set "$app" admin_pass  "$admin_pass"
 ynh_app_setting_set "$app" is_public   "$is_public"
-
+ynh_app_setting_set "$app" tuning      "$tuning"
 #=================================================
 # STANDARD MODIFICATIONS
 #=================================================
@@ -191,6 +192,20 @@ ynh_store_file_checksum "$final_path/config/production.yaml"
 ynh_use_logrotate "/home/yunohost.app/${app}/storage/logs/peertube.log"
 
 #=================================================
+# ADVERTISE SERVICE IN ADMIN PANEL
+#=================================================
+
+### `yunohost service add` is a CLI yunohost command to add a service in the admin panel.
+### You'll find the service in the 'services' section of YunoHost admin panel.
+### This CLI command would be useless if the app does not have any services (systemd or sysvinit)
+### If you're not using these lines:
+###		- You can remove these files in conf/.
+###		- Remove the section "REMOVE SERVICE FROM ADMIN PANEL" in the remove script
+###		- As well as the section ADVERTISE SERVICE IN ADMIN PANEL" in the restore script
+
+yunohost service add NAME_INIT.D --log "/home/yunohost.app/${app}/storage/logs/peertube.log"
+
+#=================================================
 # SETUP SSOWAT
 #=================================================
 
@@ -214,8 +229,6 @@ chown -R "$app":"$app" "$final_path" "$datadir"
 
 systemctl reload nginx
 
-
-
 #=================================================
 # SETUP SYSTEMD
 #=================================================
@@ -236,6 +249,17 @@ systemctl start "$app"
 	sleep 30
 	echo $admin_pass | NODE_CONFIG_DIR="$final_path/config" NODE_ENV=production npm run reset-password -- -u root
 )
+
+#=================================================
+# TUNING CONFIGURATION
+#=================================================
+if [ $tuning -eq 1  ]
+then
+
+# Copy 30-peertube-tcp to /etc/sysctl.d/
+	cp -f ../30-peertube-tcp.conf /etc/sysctl.d/
+	sysctl -p /etc/sysctl.d/30-peertube-tcp.conf
+fi
 
 #=================================================
 # SEND A README FOR THE ADMIN

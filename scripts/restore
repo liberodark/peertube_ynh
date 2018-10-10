@@ -136,6 +136,11 @@ ynh_restore_file "/etc/logrotate.d/$app"
 # Set right permissions 
 chown -R "$app":"$app" "$final_path"
 
+# TUNING CONFIGURATION
+# Copy 30-peertube-tcp to /etc/sysctl.d/
+cp -f ../30-peertube-tcp.conf /etc/sysctl.d/
+sysctl -p /etc/sysctl.d/30-peertube-tcp.conf
+
 #=================================================
 # GENERIC FINALIZATION
 #=================================================

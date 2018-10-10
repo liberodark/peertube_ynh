@@ -196,6 +196,12 @@ then
 	ynh_app_setting_set "$app" unprotected_uris "/"
 fi
 
+ 
+# TUNING CONFIGURATION
+# Copy 30-peertube-tcp to /etc/sysctl.d/
+cp -f ../30-peertube-tcp.conf /etc/sysctl.d/
+sysctl -p /etc/sysctl.d/30-peertube-tcp.conf
+
 #=================================================
 # RELOAD NGINX
 #=================================================
